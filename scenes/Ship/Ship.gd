@@ -16,10 +16,15 @@ var _star: Area2D
 @onready var screensize: Vector2 = get_viewport_rect().size
 @onready var point: Marker2D = $Point
 @onready var shoot_cooldown: Timer = $ShootCooldown
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_star = get_parent().get_child(0)
+	if player == 1:
+		sprite_2d.modulate = GameManager.Blue
+	elif player == 2:
+		sprite_2d.modulate = GameManager.Red
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,15 +57,15 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	xform.origin.x = wrapf(xform.origin.x, 0, screensize.x)
 	xform.origin.y = wrapf(xform.origin.y, 0, screensize.y)
 	state.transform = xform
-	
-	
-	
-	
 
 
 func shoot_bullet() -> void:
 	if _can_shoot == true:
 		var b: Bullet = BULLET.instantiate()
+		if player == 1:
+			b._color = GameManager.Blue
+		elif player == 2:
+			b._color = GameManager.Red
 		b._dir = transform.x
 		b.rotate(b.transform.x.angle_to(transform.x))
 		b.global_position = point.global_position

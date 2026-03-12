@@ -4,9 +4,14 @@ class_name Bullet
 
 var _speed: float = 300.0
 var _dir: Vector2 = Vector2.ZERO
+var _color: Color = Color.WHITE
+
+@onready var sprite_2d: Sprite2D = $Sprite2D
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	sprite_2d.modulate = _color
 	await get_tree().create_timer(0.05).timeout
 	set_deferred("monitorable", true)
 	set_deferred("monitoring", true)
