@@ -26,8 +26,7 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_htg0i")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1178952753]
-collision_layer = 2
-collision_mask = 2
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1834541577]
 position = Vector2(-1, 0)
@@ -35,7 +34,7 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_c0qqm")
 
 [node name="Point" type="Marker2D" parent="." unique_id=1743916214]
-position = Vector2(14, 0)
+position = Vector2(17, 0)
 
 [node name="ShootCooldown" type="Timer" parent="." unique_id=2006104067]
 wait_time = 0.4

@@ -6,3 +6,7 @@
 
 [node name="Ship" parent="." unique_id=2013613228 instance=ExtResource("1_bvmdu")]
 position = Vector2(116, 213)
+
+[node name="Ship2" parent="." unique_id=301771927 instance=ExtResource("1_bvmdu")]
+position = Vector2(110, 154)
+player = 2
