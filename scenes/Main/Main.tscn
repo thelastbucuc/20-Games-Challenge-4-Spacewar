@@ -1,12 +1,17 @@
 [gd_scene format=3 uid="uid://cm22brmholhms"]
 
 [ext_resource type="PackedScene" uid="uid://e4vgnchdwf3o" path="res://scenes/Ship/Ship.tscn" id="1_bvmdu"]
+[ext_resource type="PackedScene" uid="uid://p0qybw82bxj3" path="res://scenes/Star/Star.tscn" id="2_owiiy"]
 
 [node name="Main" type="Node2D" unique_id=284959594]
 
+[node name="Star" parent="." unique_id=995638012 instance=ExtResource("2_owiiy")]
+position = Vector2(180, 180)
+
 [node name="Ship" parent="." unique_id=2013613228 instance=ExtResource("1_bvmdu")]
-position = Vector2(116, 213)
+position = Vector2(35, 180)
 
 [node name="Ship2" parent="." unique_id=301771927 instance=ExtResource("1_bvmdu")]
-position = Vector2(110, 154)
+position = Vector2(316, 179)
+rotation = 3.1415927
 player = 2

@@ -9,6 +9,9 @@ const BULLET: PackedScene = preload("uid://ct1df2lnrytx1")
 var thrust: Vector2 = Vector2.ZERO
 var rotation_dir: float = 0
 var _can_shoot: bool = true
+var _delta: float = 0
+var _star_gravity_power: float = 120.0
+var _star: Area2D
 
 @onready var screensize: Vector2 = get_viewport_rect().size
 @onready var point: Marker2D = $Point
@@ -16,14 +19,16 @@ var _can_shoot: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	_star = get_parent().get_child(0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	_delta = delta
 	get_input()
 	constant_force = thrust
 	constant_torque = spin_power * rotation_dir
+	constant_force += global_position.direction_to(_star.global_position) * _star_gravity_power
 
 
 func get_input() -> void:
@@ -47,6 +52,10 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	xform.origin.x = wrapf(xform.origin.x, 0, screensize.x)
 	xform.origin.y = wrapf(xform.origin.y, 0, screensize.y)
 	state.transform = xform
+	
+	
+	
+	
 
 
 func shoot_bullet() -> void:
@@ -66,11 +75,11 @@ func die() -> void:
 
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	die()
 	if area.collision_layer == 1:
 		print("player%s died from crashing to another player" % str(player))
 	elif area.collision_layer == 2:
 		print("player%s died from bullet" % str(player))
+	die()
 
 
 func _on_shoot_cooldown_timeout() -> void:

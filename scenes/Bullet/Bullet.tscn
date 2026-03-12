@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://csutrluruo23b" path="res://scenes/Bullet/Bullet.gd" id="1_q70rs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2gmgl"]
-size = Vector2(7, 2)
+size = Vector2(11, 6)
 
 [node name="Bullet" type="Area2D" unique_id=1177730088]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 7
 monitoring = false
 monitorable = false
 script = ExtResource("1_q70rs")
