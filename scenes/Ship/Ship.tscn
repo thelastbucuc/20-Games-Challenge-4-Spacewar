@@ -10,6 +10,10 @@ height = 26.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c0qqm"]
 radius = 8.0
 
+[sub_resource type="Curve" id="Curve_c0qqm"]
+_data = [Vector2(0.0032679737, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.25297225), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="Ship" type="RigidBody2D" unique_id=2013613228 groups=["ships"]]
 gravity_scale = 0.0
 linear_damp = 1.0
@@ -41,6 +45,19 @@ wait_time = 0.4
 one_shot = true
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=157062422]
+
+[node name="Explosion" type="CPUParticles2D" parent="." unique_id=827664818]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 80.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_c0qqm")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout"]

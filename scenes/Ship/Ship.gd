@@ -22,14 +22,17 @@ var _star: Area2D
 @onready var shoot_cooldown: Timer = $ShootCooldown
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var sound: AudioStreamPlayer2D = $Sound
+@onready var explosion: CPUParticles2D = $Explosion
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_star = get_parent().get_child(0)
 	if player == 1:
+		explosion.color = P1_COLOR
 		sprite_2d.modulate = P1_COLOR
 		global_position = Vector2(35.0, 180.0)
 	elif player == 2:
+		explosion.color = P2_COLOR
 		global_position = Vector2(325.0, 180.0)
 		rotation_degrees = 180.0
 		sprite_2d.modulate = P2_COLOR
@@ -85,8 +88,11 @@ func shoot_bullet() -> void:
 
 
 func die() -> void:
-	SignalManager.emit_on_died(player)
 	SoundManager.play_sound(sound, "res://assets/sfx_exp_medium8.wav", true)
+	sprite_2d.hide()
+	explosion.emitting = true
+	await explosion.finished
+	SignalManager.emit_on_died(player)
 	call_deferred("set_process_mode", false)
 	call_deferred("queue_free")
 
