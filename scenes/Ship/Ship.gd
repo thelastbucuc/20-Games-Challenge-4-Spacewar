@@ -1,7 +1,10 @@
 extends RigidBody2D
 
+class_name Ship
+
 const BULLET: PackedScene = preload("uid://ct1df2lnrytx1")
 
+@onready var sound: AudioStreamPlayer2D = $Sound
 @export var player: int = 1
 @export var engine_power: float = 800
 @export var spin_power: float = 2000
@@ -23,7 +26,10 @@ func _ready() -> void:
 	_star = get_parent().get_child(0)
 	if player == 1:
 		sprite_2d.modulate = GameManager.Blue
+		global_position = Vector2(35.0, 180.0)
 	elif player == 2:
+		global_position = Vector2(325.0, 180.0)
+		rotation_degrees = 180.0
 		sprite_2d.modulate = GameManager.Red
 
 
@@ -64,8 +70,10 @@ func shoot_bullet() -> void:
 		var b: Bullet = BULLET.instantiate()
 		if player == 1:
 			b._color = GameManager.Blue
+			SoundManager.play_sound(sound, "res://assets/close_002.ogg")
 		elif player == 2:
 			b._color = GameManager.Red
+			SoundManager.play_sound(sound, "res://assets/close_003.ogg")
 		b._dir = transform.x
 		b.rotate(b.transform.x.angle_to(transform.x))
 		b.global_position = point.global_position
@@ -75,6 +83,8 @@ func shoot_bullet() -> void:
 
 
 func die() -> void:
+	SignalManager.emit_on_died(player)
+	SoundManager.play_sound(sound, "res://assets/sfx_exp_medium8.wav", true)
 	call_deferred("set_process_mode", false)
 	call_deferred("queue_free")
 

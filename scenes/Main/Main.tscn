@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://cm22brmholhms"]
 
+[ext_resource type="Script" uid="uid://c2s2u6qcdduwa" path="res://scenes/Main/Main.gd" id="1_8llo8"]
 [ext_resource type="PackedScene" uid="uid://e4vgnchdwf3o" path="res://scenes/Ship/Ship.tscn" id="1_bvmdu"]
 [ext_resource type="PackedScene" uid="uid://p0qybw82bxj3" path="res://scenes/Star/Star.tscn" id="2_owiiy"]
+[ext_resource type="PackedScene" uid="uid://qbrf5j3jfv8k" path="res://scenes/Ui/Ui.tscn" id="4_brr1f"]
 
 [node name="Main" type="Node2D" unique_id=284959594]
+script = ExtResource("1_8llo8")
 
 [node name="Star" parent="." unique_id=995638012 instance=ExtResource("2_owiiy")]
 position = Vector2(180, 180)
@@ -15,3 +18,5 @@ position = Vector2(35, 180)
 position = Vector2(316, 179)
 rotation = 3.1415927
 player = 2
+
+[node name="UI" parent="." unique_id=379906514 instance=ExtResource("4_brr1f")]

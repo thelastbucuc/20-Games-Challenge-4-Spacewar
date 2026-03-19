@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://qbrf5j3jfv8k"]
+
+[ext_resource type="FontFile" uid="uid://cesbeclve2c7m" path="res://assets/Kenney Pixel.ttf" id="1_1bmsb"]
+[ext_resource type="Script" uid="uid://bi8364087hfgm" path="res://scenes/Ui/Ui.gd" id="1_c8dpx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pkilc"]
+font = ExtResource("1_1bmsb")
+font_size = 84
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_brr1f"]
+font = ExtResource("1_1bmsb")
+font_size = 48
+font_color = Color(0, 0.8356672, 0.3356983, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_d463r"]
+font = ExtResource("1_1bmsb")
+font_size = 28
+font_color = Color(0.14999998, 0.39083332, 1, 1)
+
+[node name="UI" type="CanvasLayer" unique_id=379906514]
+process_mode = 3
+script = ExtResource("1_c8dpx")
+
+[node name="StartMenu" type="Control" parent="." unique_id=1325490822]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="StartMenu" unique_id=1137424774]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5489626, 0.5489626, 0.54896253, 0.21960784)
+
+[node name="MarginContainer" type="MarginContainer" parent="StartMenu" unique_id=1715350339]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 30
+
+[node name="Title" type="Label" parent="StartMenu/MarginContainer" unique_id=43187367]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 52
+text = "Spacewar!"
+label_settings = SubResource("LabelSettings_pkilc")
+
+[node name="Button" type="Button" parent="StartMenu" unique_id=1892753353]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -15.5
+offset_right = 23.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_1bmsb")
+theme_override_font_sizes/font_size = 22
+text = "Start"
+
+[node name="Sound" type="AudioStreamPlayer" parent="StartMenu" unique_id=405101815]
+
+[node name="Win" type="Control" parent="." unique_id=89472710]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Win" unique_id=805520651]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.5
+offset_top = -20.0
+offset_right = 111.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerLabel" type="Label" parent="Win/VBoxContainer" unique_id=2030557334]
+layout_mode = 2
+text = "Player x winned!"
+label_settings = SubResource("LabelSettings_brr1f")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartLabel" type="Label" parent="Win/VBoxContainer" unique_id=1036498211]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Restarting in x..."
+label_settings = SubResource("LabelSettings_d463r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartTimer" type="Timer" parent="Win" unique_id=671550631]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="pressed" from="StartMenu/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="Win/RestartTimer" to="." method="_on_restart_timer_timeout"]
