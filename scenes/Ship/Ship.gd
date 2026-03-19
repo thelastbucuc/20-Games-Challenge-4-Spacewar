@@ -3,8 +3,9 @@ extends RigidBody2D
 class_name Ship
 
 const BULLET: PackedScene = preload("uid://ct1df2lnrytx1")
+const P1_COLOR: Color = Color("#77bfff")
+const P2_COLOR: Color = Color("#ff7777")
 
-@onready var sound: AudioStreamPlayer2D = $Sound
 @export var player: int = 1
 @export var engine_power: float = 800
 @export var spin_power: float = 2000
@@ -20,17 +21,18 @@ var _star: Area2D
 @onready var point: Marker2D = $Point
 @onready var shoot_cooldown: Timer = $ShootCooldown
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var sound: AudioStreamPlayer2D = $Sound
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_star = get_parent().get_child(0)
 	if player == 1:
-		sprite_2d.modulate = GameManager.Blue
+		sprite_2d.modulate = P1_COLOR
 		global_position = Vector2(35.0, 180.0)
 	elif player == 2:
 		global_position = Vector2(325.0, 180.0)
 		rotation_degrees = 180.0
-		sprite_2d.modulate = GameManager.Red
+		sprite_2d.modulate = P2_COLOR
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -69,10 +71,10 @@ func shoot_bullet() -> void:
 	if _can_shoot == true:
 		var b: Bullet = BULLET.instantiate()
 		if player == 1:
-			b._color = GameManager.Blue
+			b._color = P1_COLOR
 			SoundManager.play_sound(sound, "res://assets/close_002.ogg")
 		elif player == 2:
-			b._color = GameManager.Red
+			b._color = P2_COLOR
 			SoundManager.play_sound(sound, "res://assets/close_003.ogg")
 		b._dir = transform.x
 		b.rotate(b.transform.x.angle_to(transform.x))
@@ -89,11 +91,7 @@ func die() -> void:
 	call_deferred("queue_free")
 
 
-func _on_hitbox_area_entered(area: Area2D) -> void:
-	if area.collision_layer == 1:
-		print("player%s died from crashing to another player" % str(player))
-	elif area.collision_layer == 2:
-		print("player%s died from bullet" % str(player))
+func _on_hitbox_area_entered(_area: Area2D) -> void:
 	die()
 
 

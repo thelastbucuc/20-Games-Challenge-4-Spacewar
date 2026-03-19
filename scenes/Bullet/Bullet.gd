@@ -8,7 +8,6 @@ var _color: Color = Color.WHITE
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	sprite_2d.modulate = _color
@@ -22,9 +21,7 @@ func _physics_process(delta: float) -> void:
 	position += delta * _dir * _speed
 
 
-func _on_area_entered(area: Area2D) -> void:
-	if area.collision_layer == 2:
-		print("bullet died")
+func _on_area_entered(_area: Area2D) -> void:
 	call_deferred("queue_free")
 	set_deferred("monitorable", false)
 	set_deferred("monitoring", false)

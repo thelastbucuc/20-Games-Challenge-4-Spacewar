@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://p0qybw82bxj3"]
 
-[ext_resource type="Script" uid="uid://dva1mwm77q2hl" path="res://scenes/Star/Star.gd" id="1_eswe7"]
 [ext_resource type="Texture2D" uid="uid://bsdty5miw06ks" path="res://assets/star.png" id="1_kgetw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eswe7"]
@@ -8,7 +7,6 @@ radius = 55.0
 
 [node name="Star" type="Area2D" unique_id=995638012]
 collision_mask = 3
-script = ExtResource("1_eswe7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=581726672]
 scale = Vector2(0.75, 0.75)
