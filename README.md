@@ -23,7 +23,7 @@ The star in the middle has gravity, so you can't just sit still and aim. Bullets
 
 Added explosion particles on death using `CPUParticles2D` to add some juice.
 
-This one introduced me to `RigidBody2D` which is a completely different beast compared to `CharacterBody2D`. Physics-based movement means you're fighting momentum constantly, which is kind of the whole point of the game. I used `constant_force` and `constant_torque` because its a `PhysicsBody2D` and used `_physics_process`.
+This one introduced me to `RigidBody2D` which is a completely different beast compared to `CharacterBody2D`. Physics-based movement means you're fighting momentum constantly, which is kind of the whole point of the game. I used `constant_force` and `constant_torque` to apply thrust and rotation the standard approach for `RigidBody2D` since you don't control it directly.
 
 Also built a global `SignalManager` and `SoundManager` as autoloads. Probably overkill for a game this small but good practice.
 
