@@ -23,6 +23,7 @@ var _star: Area2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var sound: AudioStreamPlayer2D = $Sound
 @onready var explosion: CPUParticles2D = $Explosion
+@onready var hitbox: Area2D = $Hitbox
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -88,7 +89,10 @@ func shoot_bullet() -> void:
 
 
 func die() -> void:
-	SoundManager.play_sound(sound, "res://assets/sfx_exp_medium8.wav", true)
+	hitbox.set_deferred("monitorable", false)
+	hitbox.set_deferred("monitoring", false)
+	if sound.playing == false:
+		SoundManager.play_sound(sound, "res://assets/sfx_exp_medium8.wav", true)
 	sprite_2d.hide()
 	explosion.emitting = true
 	await explosion.finished

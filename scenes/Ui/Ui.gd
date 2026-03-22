@@ -26,6 +26,7 @@ func _on_button_pressed() -> void:
 
 func on_died(player: int) -> void:
 	get_tree().paused = true
+	SoundManager.play_sound(sound, "res://assets/confirmation_001.ogg")
 	win.show()
 	restart_timer.start()
 	if player == 1:
@@ -33,7 +34,6 @@ func on_died(player: int) -> void:
 	if player == 2:
 		player_label.text = "Player 1 winned!"
 	await get_tree().create_timer(0.2).timeout
-	SoundManager.play_sound(sound, "res://assets/confirmation_001.ogg")
 
 
 func _on_restart_timer_timeout() -> void:
