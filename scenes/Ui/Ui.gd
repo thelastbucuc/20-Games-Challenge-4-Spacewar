@@ -30,9 +30,9 @@ func on_died(player: int) -> void:
 	win.show()
 	restart_timer.start()
 	if player == 1:
-		player_label.text = "Player 2 winned!"
+		player_label.text = "Player 2 won!"
 	if player == 2:
-		player_label.text = "Player 1 winned!"
+		player_label.text = "Player 1 won!"
 	await get_tree().create_timer(0.2).timeout
 
 

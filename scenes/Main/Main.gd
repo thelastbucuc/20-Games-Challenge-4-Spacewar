@@ -10,7 +10,6 @@ func spawn_ships() -> void:
 	for i in 2:
 		var new_ship: Ship = SHIP.instantiate()
 		new_ship.player = i + 1
-		i += 1
 		add_child(new_ship)
 
 
